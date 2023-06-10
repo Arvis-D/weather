@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:weather/api/weather_api.dart';
+import 'package:weather/di/dependencies.dart';
 
 void main() {
   runApp(const MyApp());
@@ -59,7 +62,9 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-      WeatherApi.getWeatherData();
+      DI.weatherApi.get().fetchWeatherData().then((weather){
+        log(weather.city.name);
+      });
     });
   }
 
