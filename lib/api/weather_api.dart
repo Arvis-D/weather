@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:weather/env.dart';
+import 'package:weather/model/weather_response.dart';
 
 class WeatherApi {
   static final Dio dio = _createDio();
@@ -16,6 +20,9 @@ class WeatherApi {
         'lon': '12.4964'
       },
     );
+    Map<String, dynamic> json = response.data;
+
+    log(WeatherResponse.fromJson(json).city.country);
   }
 
   static Dio _createDio() {
