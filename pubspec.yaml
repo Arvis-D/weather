@@ -39,6 +39,7 @@ dependencies:
   dio: 4.0.0
   json_annotation: ^4.8.1
   dio_logging_interceptor: ^1.0.1
+  shared_preferences: ^2.1.2
 
 dev_dependencies:
   flutter_test:
