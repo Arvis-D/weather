@@ -6,13 +6,13 @@ part 'weather_response.g.dart';
 @JsonSerializable(explicitToJson: true)
 class WeatherResponse {
   @JsonKey(name: "cod")
-  String? code;
-  int? message;
+  final String? code;
+  final int? message;
   @JsonKey(name: "cnt")
-  int? count;
+  final int? count;
   @JsonKey(name: "list")
-  List<WeatherDataItem> weatherData;
-  City city;
+  final List<WeatherDataItem> weatherData;
+  final City city;
 
   WeatherResponse(
       this.code, this.message, this.count, this.weatherData, this.city);
@@ -23,18 +23,18 @@ class WeatherResponse {
 
 @JsonSerializable(explicitToJson: true)
 class City {
-  int id;
-  String name;
+  final int id;
+  final String name;
   @JsonKey(name: "coord")
-  Coordinates coordinates;
-  String country;
-  int population;
-  int timezone;
+  final Coordinates coordinates;
+  final String country;
+  final int population;
+  final int timezone;
 
   @JsonKey(name: "sunrise")
-  int sunriseEpoch;
+  final int sunriseEpoch;
   @JsonKey(name: "sunset")
-  int sunsetEpoch;
+  final int sunsetEpoch;
 
   City(this.id, this.name, this.coordinates, this.country, this.population,
       this.timezone, this.sunriseEpoch, this.sunsetEpoch);

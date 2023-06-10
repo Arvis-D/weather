@@ -4,13 +4,13 @@ part 'weather_data_item.g.dart';
 @JsonSerializable(explicitToJson: true)
 class WeatherDataItem {
   @JsonKey(name: "dt")
-  int dateEpoch;
-  MainData main;
-  List<Weather> weather;
-  Clouds clouds;
-  Wind wind;
-  int visibility;
-  double pop;
+  final int dateEpoch;
+  final MainData main;
+  final List<Weather> weather;
+  final Clouds clouds;
+  final Wind wind;
+  final int visibility;
+  final double pop;
 
   WeatherDataItem(this.dateEpoch, this.main, this.weather, this.clouds,
       this.visibility, this.wind, this.pop);
@@ -22,23 +22,23 @@ class WeatherDataItem {
 @JsonSerializable(explicitToJson: true)
 class MainData {
   @JsonKey(name: "temp")
-  double temperatureKelvin;
+  final double temperatureKelvin;
   @JsonKey(name: "feels_like")
-  double feelsLikeKelvin;
+  final double feelsLikeKelvin;
   @JsonKey(name: "temp_min")
-  double minTemp;
+  final double minTemp;
   @JsonKey(name: "temp_max")
-  double maxTemp;
+  final double maxTemp;
   @JsonKey(name: "pressure")
-  double pressure;
+  final double pressure;
   @JsonKey(name: "sea_level")
-  double seaLevelPressure;
+  final double seaLevelPressure;
   @JsonKey(name: "grnd_level")
-  double groundLevelPressure;
+  final double groundLevelPressure;
   @JsonKey(name: "humidity")
-  double humidity;
+  final double humidity;
   @JsonKey(name: "temp_kf")
-  double tempKf;
+  final double tempKf;
 
   MainData(
       this.temperatureKelvin,
@@ -57,10 +57,10 @@ class MainData {
 
 @JsonSerializable(explicitToJson: true)
 class Weather {
-  int id;
-  String main;
-  String description;
-  String icon;
+  final int id;
+  final String main;
+  final String description;
+  final String icon;
 
   Weather(this.id, this.main, this.description, this.icon);
 
@@ -70,7 +70,7 @@ class Weather {
 
 @JsonSerializable(explicitToJson: true)
 class Clouds {
-  int all;
+  final int all;
 
   Clouds(this.all);
 
@@ -80,9 +80,9 @@ class Clouds {
 
 @JsonSerializable(explicitToJson: true)
 class Wind {
-  double speed;
-  double deg;
-  double gust;
+  final double speed;
+  final double deg;
+  final double gust;
 
   Wind(this.speed, this.deg, this.gust);
 
