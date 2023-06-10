@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:weather/api/weather_api.dart';
 import 'package:weather/di/dependencies.dart';
 
 void main() {

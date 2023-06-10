@@ -7,7 +7,7 @@ import '../api/weather_api.dart';
 import '../repository/weather_response_repository.dart';
 
 class DI {
-  static Provider<Dio> dio = Provider(() {
+  static final Provider<Dio> dio = Provider(() {
     final Dio dio = Dio();
     // Todo: to use this I have to use older dio version so find a better solution
     dio.interceptors.add(DioLoggingInterceptor(
@@ -17,9 +17,9 @@ class DI {
     return dio;
   });
 
-  static Provider<WeatherApi> weatherApi =
+  static final Provider<WeatherApi> weatherApi =
       Provider(() => WeatherApi(dio.get()));
 
-  static Provider<WeatherResponseRepository> weatherResponseRepository =
+  static final Provider<WeatherResponseRepository> weatherResponseRepository =
       Provider(() => WeatherResponseRepositoryImpl(weatherApi.get()));
 }
