@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'weather_data_item.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class WeatherDataItem {
   @JsonKey(name: "dt")
-  final int dateEpoch;
+  final int dateEpochSeconds;
   final MainData main;
   final List<Weather> weather;
   final Clouds clouds;
@@ -12,10 +13,12 @@ class WeatherDataItem {
   final int visibility;
   final double pop;
 
-  WeatherDataItem(this.dateEpoch, this.main, this.weather, this.clouds,
+  WeatherDataItem(this.dateEpochSeconds, this.main, this.weather, this.clouds,
       this.visibility, this.wind, this.pop);
 
-  factory WeatherDataItem.fromJson(Map<String, dynamic> json) => _$WeatherDataItemFromJson(json);
+  factory WeatherDataItem.fromJson(Map<String, dynamic> json) =>
+      _$WeatherDataItemFromJson(json);
+
   Map<String, dynamic> toJson() => _$WeatherDataItemToJson(this);
 }
 
@@ -51,7 +54,9 @@ class MainData {
       this.humidity,
       this.tempKf);
 
-  factory MainData.fromJson(Map<String, dynamic> json) => _$MainDataFromJson(json);
+  factory MainData.fromJson(Map<String, dynamic> json) =>
+      _$MainDataFromJson(json);
+
   Map<String, dynamic> toJson() => _$MainDataToJson(this);
 }
 
@@ -64,7 +69,9 @@ class Weather {
 
   Weather(this.id, this.main, this.description, this.icon);
 
-  factory Weather.fromJson(Map<String, dynamic> json) => _$WeatherFromJson(json);
+  factory Weather.fromJson(Map<String, dynamic> json) =>
+      _$WeatherFromJson(json);
+
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
 }
 
@@ -75,6 +82,7 @@ class Clouds {
   Clouds(this.all);
 
   factory Clouds.fromJson(Map<String, dynamic> json) => _$CloudsFromJson(json);
+
   Map<String, dynamic> toJson() => _$CloudsToJson(this);
 }
 
@@ -87,5 +95,6 @@ class Wind {
   Wind(this.speed, this.deg, this.gust);
 
   factory Wind.fromJson(Map<String, dynamic> json) => _$WindFromJson(json);
+
   Map<String, dynamic> toJson() => _$WindToJson(this);
 }
