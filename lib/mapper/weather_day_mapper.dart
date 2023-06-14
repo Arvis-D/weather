@@ -4,39 +4,36 @@ import '../model/shared/weather_data_item.dart';
 class WeatherDayMapper {
   static List<WeatherDay> fromWeatherDataItems(List<WeatherDataItem> items) {
     List<WeatherDay> weatherDays = [];
-    final DateTime nowUtc = DateTime.now().toUtc();
-    DateTime dayStart = DateTime.utc(nowUtc.year, nowUtc.month, nowUtc.day, 1);
+    if (items.isEmpty) return weatherDays;
+    items.sort((a, b) => a.dateEpochSeconds.compareTo(b.dateEpochSeconds));
 
-    while (true) {
-      WeatherDay weatherDay = _getWeatherDay(dayStart, items);
+    DateTime initialDayTime = DateTime.fromMillisecondsSinceEpoch(
+      items.first.dateEpochSeconds * 1000,
+    );
+    List<WeatherDataItem> itemsForDay = [];
 
-      if (weatherDay.data.isEmpty) break;
-      weatherDays.add(weatherDay);
+    for (WeatherDataItem item in items) {
+      DateTime itemTime = DateTime.fromMillisecondsSinceEpoch(
+        item.dateEpochSeconds * 1000,
+      );
 
-      dayStart = dayStart.add(const Duration(days: 1));
+      if (!_sameDay(initialDayTime, itemTime)) {
+        weatherDays.add(WeatherDay(itemsForDay, _getDayName(initialDayTime)));
+
+        initialDayTime = itemTime;
+        itemsForDay = [];
+      }
+
+      itemsForDay.add(item);
     }
 
     return weatherDays;
   }
 
-  static WeatherDay _getWeatherDay(
-    DateTime dayUtc,
-    List<WeatherDataItem> items,
-  ) {
-    List<WeatherDataItem> itemsForDay = [];
-
-    for (var item in items) {
-      DateTime itemTime =
-          DateTime.fromMillisecondsSinceEpoch(item.dateEpochSeconds * 1000);
-
-      if (itemTime.day == dayUtc.day &&
-          itemTime.month == dayUtc.month &&
-          itemTime.year == dayUtc.year) {
-        itemsForDay.add(item);
-      }
-    }
-
-    return WeatherDay(itemsForDay, _getDayName(dayUtc));
+  static bool _sameDay(DateTime time1, DateTime time2) {
+    return time1.day == time2.day &&
+        time1.month == time2.month &&
+        time1.year == time2.year;
   }
 
   static String _getDayName(DateTime day) {
