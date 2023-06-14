@@ -1,5 +1,5 @@
-import 'package:weather/model/weather_response.dart';
+import 'package:weather/model/local/weather_prognosis.dart';
 
-abstract class WeatherResponseRepository {
-  Future<WeatherResponse> getWeather();
+abstract class WeatherPrognosisRepository {
+  Future<WeatherPrognosis> getWeather();
 }

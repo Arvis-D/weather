@@ -20,6 +20,6 @@ class DI {
   static final Provider<WeatherApi> weatherApi =
       Provider(() => WeatherApi(dio.get()));
 
-  static final Provider<WeatherResponseRepository> weatherResponseRepository =
-      Provider(() => WeatherResponseRepositoryImpl(weatherApi.get()));
+  static final Provider<WeatherPrognosisRepository> weatherResponseRepository =
+      Provider(() => WeatherPrognosisRepositoryImpl(weatherApi.get()));
 }
