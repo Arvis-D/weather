@@ -12,55 +12,53 @@ class WeatherDataItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            _getTime(item),
-            maxLines: 1,
-            overflow: TextOverflow.fade,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
-          ),
-          Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(right: 16),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                        width: 1,
-                        color: Theme.of(context).colorScheme.onBackground),
-                  ),
-                ),
-                child: Text(
-                  item?.weather.firstOrNull?.description ?? "no weather",
-                  maxLines: 1,
-                  overflow: TextOverflow.fade,
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          _getTime(item),
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+        ),
+        Row(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 16),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                      width: 1,
+                      color: Theme.of(context).colorScheme.onBackground),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.primary
-                ),
-                child: Image.network(
-                  width: 50,
-                  height: 50,
-                  item?.weather.firstOrNull?.getIconUrl() ??
-                      WeatherApi.defaultIconUrl,
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
+              child: Text(
+                item?.weather.firstOrNull?.description ?? "no weather",
+                maxLines: 1,
+                overflow: TextOverflow.fade,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.primary
+              ),
+              child: Image.network(
+                width: 50,
+                height: 50,
+                item?.weather.firstOrNull?.getIconUrl() ??
+                    WeatherApi.defaultIconUrl,
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 
