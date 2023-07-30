@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/ui/home/weather_data_item.dart';
 
@@ -7,7 +6,7 @@ import '../../model/local/weather_day.dart';
 class WeatherDataForDay extends StatelessWidget {
   final WeatherDay? day;
 
-  const WeatherDataForDay({required this.day});
+  const WeatherDataForDay({super.key, required this.day});
 
   @override
   Widget build(BuildContext context) {

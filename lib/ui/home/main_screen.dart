@@ -36,15 +36,16 @@ class MyHomePageContent extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: Column(
               children: [
-                Container(
-                  child: LocationHeader(city: state.prognosis?.city),
-                ),
+                LocationHeader(city: state.prognosis?.city),
                 Expanded(
-                  child: WeatherDataForDay(
-                    day: state.prognosis?.days.firstOrNull,
-                  ),
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: WeatherDataForDay(
+                      day: state.prognosis?.days.firstOrNull,
+                    ),
+                  )
                 ),
-                Container(
+                SizedBox(
                   height: 100,
                   child: _DaySelector(
                     days: state.prognosis?.days ?? [],

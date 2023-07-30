@@ -8,6 +8,9 @@ class WeatherApi {
   static const String _baseUrl =
       "https://api.openweathermap.org/data/2.5/forecast";
 
+  static const String defaultIconUrl =
+      "https://openweathermap.org/img/wn/01d@2x.png";
+
   WeatherApi(this.dio);
 
   Future<WeatherResponse> fetchWeatherData() async {

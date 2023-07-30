@@ -77,6 +77,10 @@ class Weather {
       _$WeatherFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
+
+  String getIconUrl() {
+    return "https://openweathermap.org/img/wn/$icon@2x.png";
+  }
 }
 
 @JsonSerializable(explicitToJson: true)
