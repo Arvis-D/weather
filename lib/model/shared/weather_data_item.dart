@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'weather_data_item.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class WeatherDataItem {
+class WeatherDataItem extends Equatable{
   @JsonKey(name: "dt")
   final int dateEpochSeconds;
   final MainData main;
@@ -13,13 +14,16 @@ class WeatherDataItem {
   final int visibility;
   final double pop;
 
-  WeatherDataItem(this.dateEpochSeconds, this.main, this.weather, this.clouds,
+  const WeatherDataItem(this.dateEpochSeconds, this.main, this.weather, this.clouds,
       this.visibility, this.wind, this.pop);
 
   factory WeatherDataItem.fromJson(Map<String, dynamic> json) =>
       _$WeatherDataItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeatherDataItemToJson(this);
+
+  @override
+  List<Object?> get props => [dateEpochSeconds];
 }
 
 @JsonSerializable(explicitToJson: true)
