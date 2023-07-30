@@ -30,21 +30,13 @@ class MyHomePageContent extends StatelessWidget {
     return BlocBuilder<WeatherBloc, WeatherBlocState>(
         builder: (context, state) {
       return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: SafeArea(
           child: Container(
             padding: const EdgeInsets.all(8),
             child: Column(
               children: [
                 Container(
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        //                    <--- top side
-                        color: Colors.black,
-                        width: 3.0,
-                      ),
-                    ),
-                  ),
                   child: LocationHeader(city: state.prognosis?.city),
                 ),
                 Expanded(

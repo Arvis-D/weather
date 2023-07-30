@@ -10,7 +10,10 @@ class LocationHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).primaryColor,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+      ),
       padding: const EdgeInsets.all(16),
       alignment: Alignment.topLeft,
       child: Column(

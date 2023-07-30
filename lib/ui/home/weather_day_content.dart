@@ -19,7 +19,7 @@ class WeatherDataForDay extends StatelessWidget {
             WeatherDataItemWidget(item: day?.data[index]),
         itemCount: day?.data.length ?? 0,
         separatorBuilder: (context, index) {
-          return const Divider(thickness: 1, color: Colors.black);
+          return Divider(thickness: 0.25, color: Theme.of(context).colorScheme.onBackground);
         },
       ),
     );

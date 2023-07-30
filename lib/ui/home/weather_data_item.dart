@@ -1,13 +1,13 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:collection/collection.dart';
 
 import '../../model/shared/weather_data_item.dart';
 
 class WeatherDataItemWidget extends StatelessWidget {
   final WeatherDataItem? item;
 
-  const WeatherDataItemWidget({required this.item});
+  const WeatherDataItemWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,25 @@ class WeatherDataItemWidget extends StatelessWidget {
             _getTime(item),
             maxLines: 1,
             overflow: TextOverflow.fade,
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
           ),
-          Text(
-            item?.weather.firstOrNull?.description ?? "no weather",
-            maxLines: 1,
-            overflow: TextOverflow.fade,
-            style: Theme.of(context).textTheme.headlineSmall,
+          Container(
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: BorderSide(
+                        width: 1,
+                        color: Theme.of(context).colorScheme.onBackground))),
+            child: Text(
+              item?.weather.firstOrNull?.description ?? "no weather",
+              maxLines: 1,
+              overflow: TextOverflow.fade,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
           ),
         ],
       ),
