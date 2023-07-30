@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:weather/bloc/weather_bloc.dart';
+import 'package:weather/ui/home/weather_bloc.dart';
 import 'package:weather/model/shared/weather_data_item.dart';
 import 'package:collection/collection.dart';
 
-import '../di/dependencies.dart';
-import '../model/local/weather_day.dart';
-import '../model/shared/weather_city.dart';
+import '../../di/dependencies.dart';
+import '../../model/local/weather_day.dart';
+import '../../model/shared/weather_city.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});

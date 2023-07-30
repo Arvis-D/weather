@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather/api/weather_api.dart';
 import 'package:weather/mapper/weather_prognosis_mapper.dart';
 import 'package:weather/model/local/weather_prognosis.dart';
 import 'package:weather/repository/weather_response_repository.dart';
+
+import '../service/api/weather_api.dart';
 
 class WeatherPrognosisRepositoryImpl implements WeatherPrognosisRepository {
   final WeatherApi _api;

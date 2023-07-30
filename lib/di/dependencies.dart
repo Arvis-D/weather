@@ -3,8 +3,8 @@ import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:weather/di/provider.dart';
 import 'package:weather/repository/weather_response_repository_impl.dart';
 
-import '../api/weather_api.dart';
 import '../repository/weather_response_repository.dart';
+import '../service/api/weather_api.dart';
 
 class DI {
   static final Provider<Dio> dio = Provider(() {

@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/model/local/weather_prognosis.dart';
 
-import '../repository/weather_response_repository.dart';
+import '../../repository/weather_response_repository.dart';
 
 abstract class WeatherEvent extends Equatable {
   const WeatherEvent();
