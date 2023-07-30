@@ -43,10 +43,10 @@ class WeatherBlocState extends Equatable {
   List<Object?> get props => [isLoading];
 }
 
-class WeatherBlock extends Bloc<WeatherEvent, WeatherBlocState> {
+class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
   WeatherPrognosisRepository weatherRepo;
 
-  WeatherBlock({
+  WeatherBloc({
     required this.weatherRepo,
   }) : super(WeatherBlocState.initialState()) {
     on<InitEvent>(_initialize);
