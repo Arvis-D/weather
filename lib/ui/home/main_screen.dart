@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/ui/home/day_switch.dart';
@@ -6,7 +5,6 @@ import 'package:weather/ui/home/weather_bloc.dart';
 import 'package:weather/ui/home/weather_day_content.dart';
 
 import '../../di/dependencies.dart';
-import '../../model/local/weather_day.dart';
 import 'location_header.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -34,11 +32,7 @@ class MyHomePageContent extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.background,
           body: SafeArea(
             child: Container(
-              padding: const EdgeInsets.only(
-                top: 8,
-                left: 8,
-                right: 8
-              ),
+              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
               child: Column(
                 children: [
                   LocationHeader(city: state.prognosis?.city),
@@ -46,11 +40,15 @@ class MyHomePageContent extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.only(top: 16),
                       child: WeatherDataForDay(
-                        day: state.prognosis?.days.firstOrNull,
+                        day: state.getSelectedDay(),
                       ),
                     ),
                   ),
-                  DaySwitch(dayName: "Monday", hasNext: true, hasPrevious: true)
+                  DaySwitch(
+                    dayName: state.getSelectedDay()?.dayName ?? "No day",
+                    hasNext: state.hasNext,
+                    hasPrevious: state.hasPrevious,
+                  )
                 ],
               ),
             ),

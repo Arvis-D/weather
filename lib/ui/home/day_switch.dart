@@ -23,7 +23,11 @@ class DaySwitch extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.all(8),
-          child: _RoundButton(onClick: () {}, isLeft: true),
+          child: _RoundButton(
+            onClick: () => bloc.add(PreviousDay()),
+            isLeft: true,
+            visible: hasPrevious,
+          ),
         ),
         Expanded(
           child: Container(
@@ -45,7 +49,11 @@ class DaySwitch extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.all(8),
-          child: _RoundButton(onClick: () {}, isLeft: false),
+          child: _RoundButton(
+            onClick: () => bloc.add(NexDay()),
+            isLeft: false,
+            visible: hasNext,
+          ),
         ),
       ],
     );
@@ -55,22 +63,30 @@ class DaySwitch extends StatelessWidget {
 class _RoundButton extends StatelessWidget {
   final void Function() onClick;
   final bool isLeft;
+  final bool visible;
 
-  const _RoundButton({required this.onClick, required this.isLeft});
+  const _RoundButton(
+      {required this.onClick, required this.isLeft, required this.visible});
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onClick,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        shape: const CircleBorder(),
-        padding: const EdgeInsets.all(24),
-      ),
-      child: Icon(
-        isLeft ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
-        color: Theme.of(context).colorScheme.onPrimary,
-        size: 24.0,
+    return Visibility(
+      visible: visible,
+      maintainSize: true,
+      maintainAnimation: true,
+      maintainState: true,
+      child: ElevatedButton(
+        onPressed: visible ? onClick : null,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          shape: const CircleBorder(),
+          padding: const EdgeInsets.all(24),
+        ),
+        child: Icon(
+          isLeft ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
+          color: Theme.of(context).colorScheme.onPrimary,
+          size: 24.0,
+        ),
       ),
     );
   }

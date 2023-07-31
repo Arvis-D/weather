@@ -9,7 +9,7 @@ import '../service/api/weather_api.dart';
 
 class WeatherPrognosisRepositoryImpl implements WeatherPrognosisRepository {
   final WeatherApi _api;
-  static const _prefKey = 'WEATHER_PROGNOSIS';
+  static const _prefKey = 'WEATHER_PROGNOSIS_2';
 
   WeatherPrognosisRepositoryImpl(this._api);
 
