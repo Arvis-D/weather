@@ -38,21 +38,21 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
     }
   }
 
-  Future<void> _onNextDay(
+  void _onNextDay(
     NexDay event,
     Emitter<WeatherBlocState> emit,
   ) async {
     _tryChangeSelectedIdx(emit, 1);
   }
 
-  Future<void> _onPreviousDay(
+  void _onPreviousDay(
     PreviousDay event,
     Emitter<WeatherBlocState> emit,
   ) async {
     _tryChangeSelectedIdx(emit, -1);
   }
 
-  Future<void> _tryChangeSelectedIdx(
+  void _tryChangeSelectedIdx(
     Emitter<WeatherBlocState> emit,
     int change,
   ) async {
@@ -71,8 +71,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
   bool _idxValid(int idx) {
     final int lastIdx = (state.prognosis?.days.length ?? 0) - 1;
 
-    if (idx < 0 || idx > lastIdx) return false;
-
-    return true;
+    return idx >= 0 && idx <= lastIdx;
   }
 }
