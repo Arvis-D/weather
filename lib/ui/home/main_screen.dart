@@ -16,7 +16,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => WeatherBloc(
-        weatherRepo: DI.weatherResponseRepository.get(),
+        getWeatherUseCase: DI.getWeatherUseCase.get(),
       )..add(InitEvent()),
       child: const MyHomePageContent(),
     );
@@ -37,7 +37,7 @@ class MyHomePageContent extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
               child: Column(
                 children: [
-                  LocationHeader(city: state.prognosis?.city),
+                  LocationHeader(city: state.prognosis.value?.city),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.only(top: 16),

@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather/service/api/weather_api.dart';
 
+import '../../core/config.dart';
 import '../../model/shared/weather_data_item.dart';
 
 class WeatherDataItemWidget extends StatelessWidget {
@@ -53,7 +53,7 @@ class WeatherDataItemWidget extends StatelessWidget {
                 width: 50,
                 height: 50,
                 item?.weather.firstOrNull?.getIconUrl() ??
-                    WeatherApi.defaultIconUrl,
+                    Config.defaultIconUrl,
               ),
             )
           ],

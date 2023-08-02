@@ -45,6 +45,7 @@ dependencies:
   intl: ^0.18.1
   collection: ^1.17.0
   fimber: ^0.7.0
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:

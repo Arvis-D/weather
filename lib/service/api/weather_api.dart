@@ -8,18 +8,18 @@ class WeatherApi {
   static const String _baseUrl =
       "https://api.openweathermap.org/data/2.5/forecast";
 
-  static const String defaultIconUrl =
-      "https://openweathermap.org/img/wn/01d@2x.png";
-
   WeatherApi(this.dio);
 
-  Future<WeatherResponse> fetchWeatherData() async {
+  Future<WeatherResponse> fetchWeatherData(
+    double latitude,
+    double longitude,
+  ) async {
     Response response = await dio.get(
       _baseUrl,
       queryParameters: {
         'appid': Env.weatherApiKey,
-        'lat': '41.9028',
-        'lon': '12.4964'
+        'lat': latitude,
+        'lon': longitude
       },
     );
 
