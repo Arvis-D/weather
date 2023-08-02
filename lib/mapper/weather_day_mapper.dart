@@ -36,23 +36,14 @@ class WeatherDayMapper {
         time1.year == time2.year;
   }
 
-  static String _getDayName(DateTime day) {
-    String dayName = "Invalid";
-    if (day.weekday == DateTime.monday) {
-      dayName = "Monday";
-    } else if (day.weekday == DateTime.tuesday) {
-      dayName = "Tuesday";
-    } else if (day.weekday == DateTime.wednesday) {
-      dayName = "Wednesday";
-    } else if (day.weekday == DateTime.thursday) {
-      dayName = "Thursday";
-    } else if (day.weekday == DateTime.friday) {
-      dayName = "Friday";
-    } else if (day.weekday == DateTime.saturday) {
-      dayName = "Saturday";
-    } else if (day.weekday == DateTime.sunday) {
-      dayName = "Sunday";
-    }
-    return dayName;
-  }
+  static String _getDayName(DateTime day) => switch (day.weekday) {
+        DateTime.monday => "Monday",
+        DateTime.tuesday => "Tuesday",
+        DateTime.wednesday => "Wednesday",
+        DateTime.thursday => "Thrusday",
+        DateTime.friday => "Friday",
+        DateTime.saturday => "Saturday",
+        DateTime.sunday => "Sunday",
+        _ => "Invalid"
+      };
 }
