@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/ui/home/day_switch.dart';
-import 'package:weather/ui/home/weather_bloc.dart';
+import 'package:weather/ui/home/bloc/weather_bloc.dart';
 import 'package:weather/ui/home/weather_day_content.dart';
 
 import '../../di/dependencies.dart';
+import 'bloc/weather_bloc_state.dart';
+import 'bloc/weather_event.dart';
 import 'location_header.dart';
 
 class MyHomePage extends StatelessWidget {

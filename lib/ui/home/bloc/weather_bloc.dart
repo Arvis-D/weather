@@ -1,73 +1,12 @@
 import 'dart:developer';
 
-import 'package:collection/collection.dart';
-import 'package:equatable/equatable.dart';
 import 'package:fimber/fimber.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather/model/local/weather_day.dart';
 import 'package:weather/model/local/weather_prognosis.dart';
+import 'package:weather/ui/home/bloc/weather_bloc_state.dart';
+import 'package:weather/ui/home/bloc/weather_event.dart';
 
-import '../../repository/weather_response_repository.dart';
-
-abstract class WeatherEvent extends Equatable {
-  const WeatherEvent();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class InitEvent extends WeatherEvent {}
-
-class NexDay extends WeatherEvent {}
-
-class PreviousDay extends WeatherEvent {}
-
-class WeatherBlocState extends Equatable {
-  final bool isLoading;
-  final WeatherPrognosis? prognosis;
-  final int selectedIdx;
-  final bool hasNext;
-  final bool hasPrevious;
-
-  const WeatherBlocState({
-    required this.isLoading,
-    required this.prognosis,
-    required this.selectedIdx,
-    required this.hasPrevious,
-    required this.hasNext,
-  });
-
-  WeatherBlocState copyWith({
-    bool? isLoading,
-    WeatherPrognosis? prognosis,
-    int? selectedIdx,
-    bool? hasNext,
-    bool? hasPrevious,
-  }) =>
-      WeatherBlocState(
-        isLoading: isLoading ?? this.isLoading,
-        prognosis: prognosis ?? this.prognosis,
-        selectedIdx: selectedIdx ?? this.selectedIdx,
-        hasNext: hasNext ?? this.hasNext,
-        hasPrevious: hasPrevious ?? this.hasPrevious,
-      );
-
-  static WeatherBlocState initialState() => const WeatherBlocState(
-        isLoading: false,
-        prognosis: null,
-        selectedIdx: 0,
-        hasPrevious: false,
-        hasNext: true,
-      );
-
-  WeatherDay? getSelectedDay() {
-    return prognosis?.days.elementAtOrNull(selectedIdx);
-  }
-
-  @override
-  List<Object?> get props =>
-      [isLoading, prognosis, hasPrevious, hasNext, selectedIdx];
-}
+import '../../../repository/weather_response_repository.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
   WeatherPrognosisRepository weatherRepo;
