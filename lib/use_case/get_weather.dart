@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:weather/model/remote/weather_response.dart';
 import 'package:weather/repository/weather_prognosis_repository.dart';
 import 'package:weather/service/api/weather_api.dart';
 import 'package:weather/use_case/get_location.dart';
@@ -17,16 +18,26 @@ class GetWeatherUseCase {
     required this.getPositionUseCase,
   });
 
-  Future<WeatherPrognosis> call({bool shouldRefresh = false}) async {
-    Position position = await getPositionUseCase();
+  Future<WeatherPrognosis> call({bool useSaved = true}) async {
+    if (useSaved) {
+      final WeatherPrognosis? savedWeather =
+        await weatherPrognosisRepository.getWeather();
 
-    return weatherApi
-        .fetchWeatherData(position.latitude, position.longitude)
-        .then((response) {
-      WeatherPrognosis prognosis =
-          WeatherPrognosisMapper.fromWeatherResponse(response);
-      weatherPrognosisRepository.setWeather(prognosis);
-      return prognosis;
-    });
+      if (savedWeather != null) {
+        return savedWeather;
+      }
+    }
+
+    final Position position = await getPositionUseCase();
+    final WeatherResponse response = await weatherApi.fetchWeatherData(
+      position.latitude,
+      position.longitude,
+    );
+    final WeatherPrognosis prognosis =
+        WeatherPrognosisMapper.fromWeatherResponse(response);
+
+    weatherPrognosisRepository.setWeather(prognosis);
+
+    return prognosis;
   }
 }

@@ -25,7 +25,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
     emit(state.copyWith(prognosis: const DelayedResult.loading()));
 
     try {
-      WeatherPrognosis prognosis = await getWeatherUseCase();
+      final WeatherPrognosis prognosis = await getWeatherUseCase();
 
       emit(state.copyWith(prognosis: DelayedResult.fromValue(prognosis)));
     } on Exception catch (e) {
