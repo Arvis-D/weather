@@ -28,7 +28,7 @@ class WeatherTimeHero extends StatelessWidget {
   String _getTime(WeatherDataItem? item) {
     if (item == null) return "";
 
-    final DateFormat formatter = DateFormat('j');
+    final DateFormat formatter = DateFormat('Hm');
 
     DateTime time =
     DateTime.fromMillisecondsSinceEpoch(item.dateEpochSeconds * 1000)
