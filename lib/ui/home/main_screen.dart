@@ -4,6 +4,7 @@ import 'package:weather/ui/home/day_switch.dart';
 import 'package:weather/ui/home/bloc/weather_bloc.dart';
 import 'package:weather/ui/home/weather_day_content.dart';
 
+import '../../core/ui/widget/progress_indicator.dart';
 import '../../di/dependencies.dart';
 import 'bloc/weather_bloc_state.dart';
 import 'bloc/weather_event.dart';
@@ -41,9 +42,7 @@ class MyHomePageContent extends StatelessWidget {
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.only(top: 16),
-                      child: WeatherDataForDay(
-                        day: state.getSelectedDay(),
-                      ),
+                      child: _getContent(state),
                     ),
                   ),
                   DaySwitch(
@@ -57,6 +56,19 @@ class MyHomePageContent extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  // Todo: create error state
+  Widget _getContent(WeatherBlocState state) {
+    if (state.prognosis.loading) {
+      return const Center(
+        child: WeatherProgressIndicator(),
+      );
+    }
+
+    return WeatherDataForDay(
+      day: state.getSelectedDay(),
     );
   }
 }
