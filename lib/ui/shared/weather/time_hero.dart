@@ -5,6 +5,7 @@ import '../../../model/shared/weather_data_item.dart';
 
 class WeatherTimeHero extends StatelessWidget {
   final WeatherDataItem? item;
+
   String _getTag() => "WeatherTimeHero+${item?.dateEpochSeconds}";
 
   const WeatherTimeHero({super.key, required this.item});
@@ -31,8 +32,8 @@ class WeatherTimeHero extends StatelessWidget {
     final DateFormat formatter = DateFormat('Hm');
 
     DateTime time =
-    DateTime.fromMillisecondsSinceEpoch(item.dateEpochSeconds * 1000)
-        .toLocal();
+        DateTime.fromMillisecondsSinceEpoch(item.dateEpochSeconds * 1000)
+            .toLocal();
 
     return formatter.format(time);
   }
