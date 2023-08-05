@@ -16,7 +16,13 @@ class WeatherDataItemWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        WeatherTimeHero(item: item),
+        WeatherTimeHero(
+          item: item,
+          textStyle: Theme.of(context)
+              .textTheme
+              .titleSmall
+              ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+        ),
         GestureDetector(
           onTap: () {
             Navigator.of(context).push(
@@ -27,7 +33,10 @@ class WeatherDataItemWidget extends StatelessWidget {
           },
           child: Row(
             children: [
-              WeatherDescriptionHero(item: item),
+              Container(
+                padding: const EdgeInsets.only(right: 8),
+                child: WeatherDescriptionHero(item: item),
+              ),
               WeatherIconHero(item: item)
             ],
           ),

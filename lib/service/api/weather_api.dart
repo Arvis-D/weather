@@ -19,7 +19,8 @@ class WeatherApi {
       queryParameters: {
         'appid': Env.weatherApiKey,
         'lat': latitude,
-        'lon': longitude
+        'lon': longitude,
+        'units': "metric"
       },
     );
 

@@ -17,25 +17,39 @@ class WeatherDescriptionHero extends StatelessWidget {
   Widget build(BuildContext context) {
     return Hero(
       tag: _getTag(),
-      child: Container(
-        margin: const EdgeInsets.only(right: 16),
-        decoration: needsUnderline
-            ? BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      width: 1,
-                      color: Theme.of(context).colorScheme.onBackground),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            item?.main.temperatureKelvin.toCelsius().asDegrees() ?? "",
+            maxLines: 1,
+            overflow: TextOverflow.fade,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
-              )
-            : null,
-        child: Text(
-          item?.weather.firstOrNull?.description ?? "",
-          maxLines: 1,
-          overflow: TextOverflow.fade,
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  width: 1,
+                  color: needsUnderline
+                      ? Theme.of(context).colorScheme.onBackground
+                      : Colors.transparent,
+                ),
               ),
-        ),
+            ),
+            child: Text(
+              item?.weather.firstOrNull?.description ?? "",
+              maxLines: 1,
+              overflow: TextOverflow.fade,
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+            ),
+          ),
+        ],
       ),
     );
   }

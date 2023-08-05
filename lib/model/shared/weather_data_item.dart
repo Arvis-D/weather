@@ -106,3 +106,11 @@ class Wind {
 
   Map<String, dynamic> toJson() => _$WindToJson(this);
 }
+
+extension KelvinToCelsius on double {
+  int toCelsius() => (this - 273.15).round();
+}
+
+extension AppendDegree on num {
+  String asDegrees() => "$this°";
+}
