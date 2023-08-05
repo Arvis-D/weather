@@ -20,7 +20,7 @@ class LocationHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "${city?.country}, ${city?.name ?? ""}",
+            "${city?.country ?? ""}, ${city?.name ?? ""}",
             maxLines: 1,
             overflow: TextOverflow.fade,
             style: Theme.of(context).textTheme.headlineLarge,
