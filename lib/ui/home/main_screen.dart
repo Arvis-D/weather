@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/ui/home/day_switch.dart';
 import 'package:weather/ui/home/bloc/weather_bloc.dart';
 import 'package:weather/ui/home/weather_day_content.dart';
+import 'package:weather/ui/shared/round_icon_button.dart';
 
 import '../../core/ui/widget/progress_indicator.dart';
 import '../../di/dependencies.dart';
@@ -34,24 +35,40 @@ class MyHomePageContent extends StatelessWidget {
         return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           body: SafeArea(
-            child: Container(
-              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-              child: Column(
-                children: [
-                  LocationHeader(city: state.prognosis.value?.city),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: _getContent(state),
+            child: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                  child: Column(
+                    children: [
+                      LocationHeader(city: state.prognosis.value?.city),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: _getContent(state),
+                        ),
+                      ),
+                      DaySwitch(
+                        dayName: state.getSelectedDay()?.dayName ?? "No day",
+                        hasNext: state.hasNext,
+                        hasPrevious: state.hasPrevious,
+                      )
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Transform.translate(
+                    offset: const Offset(0, -64 - 8),
+                    child: RoundIconButton(
+                      enabled: !state.prognosis.loading,
+                      iconData: Icons.replay,
+                      onClick: () =>
+                          BlocProvider.of<WeatherBloc>(context).add(Refresh()),
                     ),
                   ),
-                  DaySwitch(
-                    dayName: state.getSelectedDay()?.dayName ?? "No day",
-                    hasNext: state.hasNext,
-                    hasPrevious: state.hasPrevious,
-                  )
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );

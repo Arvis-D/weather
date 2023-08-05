@@ -112,5 +112,5 @@ extension KelvinToCelsius on double {
 }
 
 extension AppendDegree on num {
-  String asDegrees() => "$this°";
+  String asDegrees() => "${round()}°";
 }

@@ -10,14 +10,16 @@ class DelayedResult<T> extends Equatable {
         exception = e,
         loading = false;
 
-  const DelayedResult.fromValue(T result)
-      : value = result,
-        exception = null,
+  const DelayedResult.fromValue(this.value)
+      : exception = null,
         loading = false;
 
-  const DelayedResult.loading()
-      : value = null,
-        exception = null,
+  const DelayedResult.loading({this.value})
+      : exception = null,
+        loading = true;
+
+  const DelayedResult.refresh(this.value)
+      : exception = null,
         loading = true;
 
   bool get isSuccessful => value != null;

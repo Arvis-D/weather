@@ -21,7 +21,7 @@ class WeatherDescriptionHero extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            item?.main.temperatureKelvin.toCelsius().asDegrees() ?? "",
+            item?.main.temperatureKelvin.asDegrees() ?? "",
             maxLines: 1,
             overflow: TextOverflow.fade,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(

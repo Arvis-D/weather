@@ -14,8 +14,9 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
     required this.getWeatherUseCase,
   }) : super(WeatherBlocState.initialState()) {
     on<InitEvent>(_initialize);
-    on<NexDay>(_onNextDay);
-    on<PreviousDay>(_onPreviousDay);
+    on<GoToNextDay>(_onNextDay);
+    on<GoToPreviousDay>(_onPreviousDay);
+    on<Refresh>(_refresh);
   }
 
   Future<void> _initialize(
@@ -24,10 +25,36 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
   ) async {
     emit(state.copyWith(prognosis: const DelayedResult.loading()));
 
-    try {
-      final WeatherPrognosis prognosis = await getWeatherUseCase();
+    await _tryFetchWeather(emit, true);
+  }
 
-      emit(state.copyWith(prognosis: DelayedResult.fromValue(prognosis)));
+  Future<void> _refresh(
+    Refresh event,
+    Emitter<WeatherBlocState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        prognosis: DelayedResult.loading(value: state.prognosis.value),
+      ),
+    );
+
+    await _tryFetchWeather(emit, false);
+  }
+
+  Future<void> _tryFetchWeather(
+      Emitter<WeatherBlocState> emit, bool useSaved) async {
+    try {
+      final WeatherPrognosis prognosis =
+          await getWeatherUseCase(useSaved: useSaved);
+
+      emit(
+        state.copyWith(
+          selectedIdx: 0,
+          hasNext: _idxValid(prognosis, 1),
+          hasPrevious: false,
+          prognosis: DelayedResult.fromValue(prognosis),
+        ),
+      );
     } on Exception catch (e) {
       state.copyWith(prognosis: DelayedResult.fromError(e));
     } catch (e) {
@@ -36,14 +63,14 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
   }
 
   void _onNextDay(
-    NexDay event,
+    GoToNextDay event,
     Emitter<WeatherBlocState> emit,
   ) async {
     _tryChangeSelectedIdx(emit, 1);
   }
 
   void _onPreviousDay(
-    PreviousDay event,
+    GoToPreviousDay event,
     Emitter<WeatherBlocState> emit,
   ) async {
     _tryChangeSelectedIdx(emit, -1);
@@ -55,18 +82,18 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
   ) async {
     final int newIdx = state.selectedIdx + change;
 
-    if (!_idxValid(newIdx)) return;
+    if (!_idxValid(state.prognosis.value, newIdx)) return;
 
     emit(state.copyWith(
       prognosis: null,
       selectedIdx: newIdx,
-      hasNext: _idxValid(newIdx + 1),
-      hasPrevious: _idxValid(newIdx - 1),
+      hasNext: _idxValid(state.prognosis.value, newIdx + 1),
+      hasPrevious: _idxValid(state.prognosis.value, newIdx - 1),
     ));
   }
 
-  bool _idxValid(int idx) {
-    final int lastIdx = (state.prognosis.value?.days.length ?? 0) - 1;
+  bool _idxValid(WeatherPrognosis? prognosis, int idx) {
+    final int lastIdx = (prognosis?.days.length ?? 0) - 1;
 
     return idx >= 0 && idx <= lastIdx;
   }

@@ -9,6 +9,8 @@ abstract class WeatherEvent extends Equatable {
 
 class InitEvent extends WeatherEvent {}
 
-class NexDay extends WeatherEvent {}
+class GoToNextDay extends WeatherEvent {}
 
-class PreviousDay extends WeatherEvent {}
+class GoToPreviousDay extends WeatherEvent {}
+
+class Refresh extends WeatherEvent {}

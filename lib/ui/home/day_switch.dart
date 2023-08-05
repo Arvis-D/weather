@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/ui/home/bloc/weather_bloc.dart';
 
+import '../shared/round_icon_button.dart';
 import 'bloc/weather_event.dart';
 
 class DaySwitch extends StatelessWidget {
@@ -25,10 +26,10 @@ class DaySwitch extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.all(8),
-          child: _RoundButton(
-            onClick: () => bloc.add(PreviousDay()),
-            isLeft: true,
+          child: RoundIconButton(
+            onClick: () => bloc.add(GoToPreviousDay()),
             visible: hasPrevious,
+            iconData: Icons.arrow_back_ios,
           ),
         ),
         Expanded(
@@ -51,45 +52,13 @@ class DaySwitch extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.all(8),
-          child: _RoundButton(
-            onClick: () => bloc.add(NexDay()),
-            isLeft: false,
+          child: RoundIconButton(
+            onClick: () => bloc.add(GoToNextDay()),
             visible: hasNext,
+            iconData: Icons.arrow_forward_ios,
           ),
         ),
       ],
-    );
-  }
-}
-
-class _RoundButton extends StatelessWidget {
-  final void Function() onClick;
-  final bool isLeft;
-  final bool visible;
-
-  const _RoundButton(
-      {required this.onClick, required this.isLeft, required this.visible});
-
-  @override
-  Widget build(BuildContext context) {
-    return Visibility(
-      visible: visible,
-      maintainSize: true,
-      maintainAnimation: true,
-      maintainState: true,
-      child: ElevatedButton(
-        onPressed: visible ? onClick : null,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          shape: const CircleBorder(),
-          padding: const EdgeInsets.all(24),
-        ),
-        child: Icon(
-          isLeft ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
-          color: Theme.of(context).colorScheme.onPrimary,
-          size: 24.0,
-        ),
-      ),
     );
   }
 }

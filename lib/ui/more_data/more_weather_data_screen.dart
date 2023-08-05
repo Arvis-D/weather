@@ -102,14 +102,13 @@ class _Content extends StatelessWidget {
           _InfoPair(name: "Wind speed", value: "${item?.wind.speed} m/s"),
           _InfoPair(name: "Wind speed Gusts", value: "${item?.wind.gust} m/s"),
           _InfoPair(name: "Wind direction", value: "${item?.wind.deg}°"),
-          _InfoPair(name: "Feels like temp", value: "${item?.main.feelsLikeKelvin}"),
-          _InfoPair(name: "Temperature", value: "${item?.main.temperatureKelvin}"),
-          _InfoPair(name: "Max temp", value: "${item?.main.maxTemp}"),
-          _InfoPair(name: "Min temp", value: "${item?.main.minTemp}"),
+          _InfoPair(name: "Feels like temp", value: "${item?.main.feelsLikeKelvin.asDegrees()}"),
+          _InfoPair(name: "Temperature", value: "${item?.main.temperatureKelvin.asDegrees()}"),
+          _InfoPair(name: "Max temp", value: "${item?.main.maxTemp.asDegrees()}"),
+          _InfoPair(name: "Min temp", value: "${item?.main.minTemp.asDegrees()}"),
           _InfoPair(name: "Humidity", value: "${item?.main.humidity}%"),
           _InfoPair(name: "Ground lvl pressure", value: "${item?.main.groundLevelPressure} hPa"),
-          _InfoPair(name: "Sea lvl pressure", value: "${item?.main.seaLevelPressure} hPa"),
-          _InfoPair(name: "Pressure", value: "${item?.main.pressure} hPa"),
+          _InfoPair(name: "Sea lvl pressure", value: "${item?.main.seaLevelPressure} hPa")
         ];
 
   @override
