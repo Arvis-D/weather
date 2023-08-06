@@ -7,6 +7,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/core/config.dart';
+import 'package:weather/core/crashlytics_tree.dart';
 import 'package:weather/ui/weather_app.dart';
 
 import 'firebase_options.dart';
@@ -16,11 +17,8 @@ main() {
     WidgetsFlutterBinding.ensureInitialized();
     bool isProd = Config.getFlavor() == Flavor.prod;
 
-    if (!kReleaseMode) {
-      Fimber.plantTree(DebugTree());
-    }
-
     await _initFirebase(isProd);
+    _initFimber();
 
     runApp(const WeatherApp());
   }, (error, stack) {
@@ -41,9 +39,15 @@ Future<void> _initFirebase(bool isProd) async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
-  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(isProd);
 
-  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  await analytics.setAnalyticsCollectionEnabled(isProd);
-  await analytics.logAppOpen();
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(isProd);
+  await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(isProd);
+}
+
+void _initFimber() {
+  if (!kReleaseMode) {
+    Fimber.plantTree(DebugTree());
+  } else {
+    Fimber.plantTree(CrashlyticsTree());
+  }
 }
