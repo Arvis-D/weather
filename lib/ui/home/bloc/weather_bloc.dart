@@ -1,4 +1,5 @@
 import 'package:fimber/fimber.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/core/delayed_result.dart';
 import 'package:weather/model/local/weather_prognosis.dart';
@@ -32,6 +33,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
     Refresh event,
     Emitter<WeatherBlocState> emit,
   ) async {
+    FirebaseAnalytics.instance.logEvent(name: "refresh_weather");
     emit(
       state.copyWith(
         prognosis: DelayedResult.loading(value: state.prognosis.value),
@@ -66,6 +68,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
     GoToNextDay event,
     Emitter<WeatherBlocState> emit,
   ) async {
+    FirebaseAnalytics.instance.logEvent(name: "go_to_next_day");
     _tryChangeSelectedIdx(emit, 1);
   }
 
@@ -73,6 +76,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherBlocState> {
     GoToPreviousDay event,
     Emitter<WeatherBlocState> emit,
   ) async {
+    FirebaseAnalytics.instance.logEvent(name: "go_to_previous_day");
     _tryChangeSelectedIdx(emit, -1);
   }
 

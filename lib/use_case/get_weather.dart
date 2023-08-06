@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/model/remote/weather_response.dart';
 import 'package:weather/repository/weather_prognosis_repository.dart';
@@ -20,6 +21,8 @@ class GetWeatherUseCase {
 
   Future<WeatherPrognosis> call({bool useSaved = true}) async {
     if (useSaved) {
+      FirebaseAnalytics.instance.logEvent(name: "using_saved_weather");
+
       final WeatherPrognosis? savedWeather =
         await weatherPrognosisRepository.getWeather();
 
@@ -28,6 +31,7 @@ class GetWeatherUseCase {
       }
     }
 
+    FirebaseAnalytics.instance.logEvent(name: "fetching_weather_from_api");
     final Position position = await getPositionUseCase();
     final WeatherResponse response = await weatherApi.fetchWeatherData(
       position.latitude,
