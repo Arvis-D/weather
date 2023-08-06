@@ -6,7 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:weather/core/config.dart';
 import 'package:weather/core/crashlytics_tree.dart';
 import 'package:weather/ui/weather_app.dart';
@@ -20,8 +19,6 @@ main() {
 
     await _initFirebase(isProd);
     _initFimber();
-
-    await dotenv.load(fileName: ".env");
 
     runApp(const WeatherApp());
   }, (error, stack) {

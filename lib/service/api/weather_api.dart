@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-import '../../model/remote/weather_response.dart';
 import '../../core/config.dart';
+import '../../model/remote/weather_response.dart';
 
 class WeatherApi {
   final Dio dio;

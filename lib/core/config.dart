@@ -1,5 +1,3 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 class Config {
   static const String weatherPrognosisSharedPreferencesKey =
       "WEATHER_PROGNOSIS";
@@ -16,7 +14,7 @@ class Config {
       };
 
   static String getApiKey() =>
-      dotenv.env['WEATHER_API_KEY'] ?? "WEATHER_API_KEY";
+      const String.fromEnvironment("API_KEY", defaultValue: "");
 }
 
 enum Flavor { prod, stage }
