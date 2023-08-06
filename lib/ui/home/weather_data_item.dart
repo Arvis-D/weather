@@ -20,7 +20,7 @@ class WeatherDataItemWidget extends StatelessWidget {
           item: item,
           textStyle: Theme.of(context)
               .textTheme
-              .titleSmall
+              .titleMedium
               ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
         GestureDetector(
