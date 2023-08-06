@@ -9,7 +9,7 @@ class WeatherPrognosisPreferencesRepository
     implements WeatherPrognosisRepository {
   WeatherPrognosisPreferencesRepository();
 
-  static const String _key = Config.weatherPrognosisSharedPreferenceskey;
+  static const String _key = Config.weatherPrognosisSharedPreferencesKey;
 
   @override
   Future<WeatherPrognosis?> getWeather() async {

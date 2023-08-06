@@ -1,5 +1,5 @@
 class Config {
-  static const String weatherPrognosisSharedPreferenceskey =
+  static const String weatherPrognosisSharedPreferencesKey =
       "WEATHER_PROGNOSIS";
 
   static const String defaultIconUrl =
