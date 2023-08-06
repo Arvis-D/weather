@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
+import 'package:weather/core/config.dart';
 import 'package:weather/di/provider.dart';
 import 'package:weather/use_case/get_location.dart';
 import 'package:weather/use_case/get_weather.dart';
@@ -11,13 +12,17 @@ import '../service/api/weather_api.dart';
 class DI {
   static final Provider<Dio> dio = Provider(() {
     final Dio dio = Dio();
-    // Todo: to use this I have to use older dio version so find a better solution
-    dio.interceptors.add(
-      DioLoggingInterceptor(
-        level: Level.body,
-        compact: false,
-      ),
-    );
+
+    if (Config.getFlavor() != Flavor.prod) {
+      // Todo: to use this I have to use an older version of dio so find a better solution
+      dio.interceptors.add(
+        DioLoggingInterceptor(
+          level: Level.body,
+          compact: false,
+        ),
+      );
+    }
+
     return dio;
   });
 

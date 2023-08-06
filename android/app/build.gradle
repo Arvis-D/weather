@@ -66,8 +66,20 @@ android {
         }
     }
 
+    flavorDimensions "app"
+    productFlavors {
+        prod {
+            dimension "app"
+        }
+
+        stage {
+            dimension "app"
+        }
+    }
+
     buildTypes {
         release {
+            minifyEnabled true
             signingConfig signingConfigs.release
         }
     }
