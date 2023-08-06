@@ -41,10 +41,9 @@ Future<void> _initFirebase(bool isProd) async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
-
   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(isProd);
-  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  analytics.setAnalyticsCollectionEnabled(isProd);
 
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  await analytics.setAnalyticsCollectionEnabled(isProd);
   await analytics.logAppOpen();
 }
