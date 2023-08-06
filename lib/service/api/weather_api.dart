@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:weather/core/env.dart';
 
 import '../../model/remote/weather_response.dart';
+import '../../core/config.dart';
 
 class WeatherApi {
   final Dio dio;
@@ -17,7 +17,7 @@ class WeatherApi {
     Response response = await dio.get(
       _baseUrl,
       queryParameters: {
-        'appid': Env.weatherApiKey,
+        'appid': Config.getApiKey(),
         'lat': latitude,
         'lon': longitude,
         'units': "metric"
